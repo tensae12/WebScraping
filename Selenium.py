@@ -22,8 +22,18 @@ home_team = []
 score = []
 away_team = []
 
+#get all elements with tag name 'tr'
 for match in matches:
-    print(match.text)
+    #print(match.text)
+    #scraping data for each element/match (date, team name, score, away team)
+    date.append(match.find_element(By.XPATH, './td[1]').text)
+    home_team.append(match.find_element(By.XPATH, './td[2]').text)
+    score.append(match.find_element(By.XPATH, './td[3]').text)
+    away_team.append(match.find_element(By.XPATH, './td[4]').text)
+
+
+
+
 
 
 time.sleep(10) 
