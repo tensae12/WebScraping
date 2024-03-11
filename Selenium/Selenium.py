@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import pandas as pd
 import time
 
 
@@ -11,7 +12,7 @@ chrome_options = webdriver.ChromeOptions()
 driver = webdriver.Chrome(options=chrome_options) #Driver Attribute
 driver.get(website)
 
-# Finding Elements
+#####--------Finding Elements----------#########
 all_matches_button = driver.find_element(by="xpath",value='//label[@analytics-event="All matches"]') #'//label[@analytics-event="All matches"]'
 all_matches_button.click()
 
@@ -31,6 +32,10 @@ for match in matches:
     score.append(match.find_element(By.XPATH, './td[3]').text)
     away_team.append(match.find_element(By.XPATH, './td[4]').text)
 
+##########-----Exporting data to a CSV file with Pandas-----------######   
+df = pd.DataFrame({'Date': date, 'Home_team': home_team, 'Score': score, 'Away_team': away_team})
+df.to_csv('Soccer_data.csv', index=False)
+print(df)
 
 
 
